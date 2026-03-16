@@ -1,5 +1,7 @@
 # mybad
-![Go 1.18+](https://img.shields.io/badge/1.18+-0?style=for-the-badge&color=000&logo=Go&label&logoColor=fff&logoSize=auto)[![Go Reference](https://img.shields.io/badge/reference-0?style=for-the-badge&color=000)](https://pkg.go.dev/github.com/nlozgachev/mybad)
+![Go 1.18+](https://img.shields.io/badge/1.18+-0?style=for-the-badge&color=000&logo=Go&label&logoColor=fff&logoSize=auto)
+[![Go Reference](https://img.shields.io/badge/reference-0?style=for-the-badge&color=000)](https://pkg.go.dev/github.com/nlozgachev/mybad)
+[![Latest release](https://img.shields.io/github/v/release/nlozgachev/mybad?style=for-the-badge&label=%20&color=000)](https://github.com/nlozgachev/mybad/releases)
 
 ```go
 go get github.com/nlozgachev/mybad@latest
