@@ -1,0 +1,16 @@
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+coverage.html
+
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~

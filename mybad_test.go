@@ -46,6 +46,30 @@ func TestFrom_error(t *testing.T) {
 
 // Terminal methods
 
+func TestIsOk_healthy(t *testing.T) {
+	if !mybad.Ok(1).IsOk() {
+		t.Fatal("expected IsOk to return true for healthy Result")
+	}
+}
+
+func TestIsOk_error(t *testing.T) {
+	if mybad.From(0, sentinel).IsOk() {
+		t.Fatal("expected IsOk to return false for error Result")
+	}
+}
+
+func TestIsErr_error(t *testing.T) {
+	if !mybad.From(0, sentinel).IsErr() {
+		t.Fatal("expected IsErr to return true for error Result")
+	}
+}
+
+func TestIsErr_healthy(t *testing.T) {
+	if mybad.Ok(1).IsErr() {
+		t.Fatal("expected IsErr to return false for healthy Result")
+	}
+}
+
 func TestErr_healthy(t *testing.T) {
 	if err := mybad.Ok(1).Err(); err != nil {
 		t.Fatalf("expected nil, got %v", err)
@@ -92,6 +116,46 @@ func TestUnwrap_error(t *testing.T) {
 	}
 	if v != 0 {
 		t.Fatalf("expected zero value, got %v", v)
+	}
+}
+
+// ValueOr / ValueOrElse
+
+func TestValueOr_healthy(t *testing.T) {
+	if v := mybad.Ok(5).ValueOr(99); v != 5 {
+		t.Fatalf("got %v, want 5", v)
+	}
+}
+
+func TestValueOr_error(t *testing.T) {
+	if v := mybad.From(0, sentinel).ValueOr(99); v != 99 {
+		t.Fatalf("got %v, want 99", v)
+	}
+}
+
+func TestValueOrElse_healthy(t *testing.T) {
+	called := false
+	v := mybad.Ok(5).ValueOrElse(func(err error) int {
+		called = true
+		return 99
+	})
+	if called {
+		t.Fatal("fn should not be called for healthy Result")
+	}
+	if v != 5 {
+		t.Fatalf("got %v, want 5", v)
+	}
+}
+
+func TestValueOrElse_error(t *testing.T) {
+	v := mybad.From(0, sentinel).ValueOrElse(func(err error) int {
+		if !errors.Is(err, sentinel) {
+			t.Fatalf("fn received wrong error: %v", err)
+		}
+		return 99
+	})
+	if v != 99 {
+		t.Fatalf("got %v, want 99", v)
 	}
 }
 

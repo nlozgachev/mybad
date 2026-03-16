@@ -50,3 +50,21 @@ func (r Result[T]) Must() T {
 func (r Result[T]) Unwrap() (T, error) {
 	return r.value, r.err
 }
+
+// ValueOr returns the value if the Result is healthy, or defaultValue if it is in error state.
+// The error is not surfaced; use Match or Unwrap if you need it.
+func (r Result[T]) ValueOr(defaultValue T) T {
+	if r.err != nil {
+		return defaultValue
+	}
+	return r.value
+}
+
+// ValueOrElse returns the value if the Result is healthy, or calls fn with the error
+// and returns its result. fn is not called if the Result is healthy.
+func (r Result[T]) ValueOrElse(fn func(error) T) T {
+	if r.err != nil {
+		return fn(r.err)
+	}
+	return r.value
+}
