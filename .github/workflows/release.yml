@@ -1,0 +1,17 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    name: Publish to pkg.go.dev
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+
+      - name: Notify module proxy
+        run: GOPROXY=proxy.golang.org go list -m github.com/nlozgachev/mybad@${{ github.ref_name }}
