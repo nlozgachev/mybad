@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/nlozgachev/mybad"
+	"github.com/nlozgachev/mybad/v2"
 )
 
 func ExampleOk() {
