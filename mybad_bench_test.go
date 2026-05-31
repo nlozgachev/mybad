@@ -5,7 +5,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/nlozgachev/mybad"
+	"github.com/nlozgachev/mybad/v2"
 )
 
 var (

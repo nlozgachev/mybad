@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/nlozgachev/mybad"
+	"github.com/nlozgachev/mybad/v2"
 )
 
 var sentinel = errors.New("sentinel error")
